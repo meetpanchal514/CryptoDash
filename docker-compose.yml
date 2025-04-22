@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - '5001:5000'  # Changed backend port to 5001
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - crypto-net
+    environment:
+      - NODE_ENV=development
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - crypto-net
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+
+networks:
+  crypto-net:
+    driver: bridge
