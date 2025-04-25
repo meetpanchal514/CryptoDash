@@ -1,33 +1,65 @@
-services:
-  backend:
-    build: ./backend
-    container_name: backend
-    ports:
-      - '5001:5000'  # Changed backend port to 5001
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-    networks:
-      - crypto-net
-    environment:
-      - NODE_ENV=development
+# services:
+#   backend:
+#     build: ./backend
+#     container_name: backend
+#     ports:
+#       - '5000:5000'
+#     volumes:
+#       - ./backend:/app
+#       - /app/node_modules
+#     networks:
+#       - crypto-net
+#     environment:
+#       - NODE_ENV=development
+  
+#   frontend:
+#     build: ./frontend
+#     container_name: frontend
+#     ports:
+#       - '3000:3000'
+#     volumes:
+#       - ./frontend:/app
+#       - /app/node_modules
+#     depends_on:
+#       - backend
+#     networks:
+#       - crypto-net
+#     environment:
+#       - NODE_ENV=development
+#       - CHOKIDAR_USEPOLLING=true
+#       - REACT_APP_API_URL=http://localhost:5000  # Ensure this is set correctly
+# networks:
+#   crypto-net:
+#     driver: bridge
 
-  frontend:
-    build: ./frontend
-    container_name: frontend
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    depends_on:
-      - backend
-    networks:
-      - crypto-net
-    environment:
-      - NODE_ENV=development
-      - CHOKIDAR_USEPOLLING=true
+     services:
+       frontend:
+         build:
+           context: ./frontend
+           dockerfile: Dockerfile
+         ports:
+           - "3000:3000"
+         environment:
+           - REACT_APP_API_URL=http://backend:5000
+         depends_on:
+           - backend
+         networks:
+           - cryptodash-network
 
-networks:
-  crypto-net:
-    driver: bridge
+       backend:
+         build:
+           context: ./backend
+           dockerfile: Dockerfile
+         ports:
+           - "5000:5000"
+         environment:
+           - COINMARKETCAP_API_KEY=${COINMARKETCAP_API_KEY}
+         dns:
+           - 8.8.8.8
+           - 8.8.4.4
+         networks:
+           - cryptodash-network
+
+     networks:
+       cryptodash-network:
+         driver: bridge
