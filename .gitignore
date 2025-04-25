@@ -1,23 +1,41 @@
-Node.js
+# Use a here-string to write the .gitignore file
+@"
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
 
-node_modules/ npm-debug.log yarn-error.log
+# Docker-related files
+*.docker
+docker-compose.yml.bak
 
-Docker
+# Build output
+dist/
+build/
 
-*.docker docker-compose.yml.bak
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-Build output
+# Editor and IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
 
-dist/ build/
+# OS-generated files
+.DS_Store
+Thumbs.db
 
-Environment variables
-
-.env .env.local .env.development.local .env.test.local .env.production.local
-
-Editor files
-
-.vscode/ .idea/ *.suo .ntvs*.njsproj *.sln *.swp
-
-OS generated files
-
-.DS_Store Thumbs.db
+# Ensure backend and frontend folders are included (except for ignored patterns above)
+/backend/*
+!/backend/*
+/frontend/*
+!/frontend/*
+"@ 

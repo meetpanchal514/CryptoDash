@@ -1,0 +1,66 @@
+:root {
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] {
+    --background-gradient: linear-gradient(to bottom, #f5f5f5, #e5e5e5) !important;
+    --card-background: rgba(255, 255, 255, 0.858) !important;
+    --text-color: #1d1d1f !important;
+    --text-color-secondary: #1b1b1b !important;
+    --navbar-bg: #fafafaf2 !important;
+    --button-bg: #007aff !important;
+    --button-bg-hover: #005bb5 !important;
+    --button-text: #ffffff !important;
+    --sphere-color-1: #60a5fa !important;
+    --sphere-color-2: #a78bfa !important;
+    --pagination-bg: #d1d1d6 !important;
+    --pagination-bg-active: #007aff !important;
+    --pagination-text: #1d1d1f !important;
+    --pagination-text-active: #ffffff !important;
+    --error-text: #dc2626 !important;
+    --chart-line-color: #000000 !important; /* Black for light mode */
+    --chart-fill-color: rgba(0, 0, 0, 0.1) !important; /* Light black fill for light mode */
+}
+
+[data-theme="dark"] {
+    --background-gradient: linear-gradient(to bottom, #1f2937, #111827) !important;
+    --card-background: rgba(206, 206, 237, 0.634) !important;
+    --text-color: #ffffff !important;
+    --text-color-secondary: #1b1b1b !important;
+    --navbar-bg: rgba(34, 33, 47, 0.95) !important;
+    --button-bg: #3b82f6 !important;
+    --button-bg-hover: #2563eb !important;
+    --button-text: #ffffff !important;
+    --sphere-color-1: #3b82f6 !important;
+    --sphere-color-2: #8b5cf6 !important;
+    --pagination-bg: #4b5563 !important;
+    --pagination-bg-active: #3b82f6 !important;
+    --pagination-text: #d1d5db !important;
+    --pagination-text-active: #ffffff !important;
+    --border-color: rgba(255, 255, 255, 0.1) !important;
+    --shadow-color: rgba(255, 255, 255, 0.1) !important;
+    --error-text: #f87171 !important;
+    --chart-line-color: #ffffff !important; /* White for dark mode */
+    --chart-fill-color: rgba(255, 255, 255, 0.2) !important; /* Light white fill for dark mode */
+}
+
+/* 3D Card Effect */
+.card-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+}
+
+/* Floating Spheres */
+.sphere-1 {
+    background-color: var(--sphere-color-1) !important;
+}
+
+.sphere-2 {
+    background-color: var(--sphere-color-2) !important;
+}
