@@ -1,12 +1,11 @@
-
-
-
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import NavbarComponent from './components/NavbarComponent';
 import Footer from './components/Footer';
+import SignIn from './components/SignIn';
+import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 import './apstyles.css';
 
@@ -20,11 +19,18 @@ function App() {
     >
       <div className="relative min-h-screen flex flex-col">
         <NavbarComponent />
-        {/* Add padding-top for navbar (h-16) and padding-bottom for footer (py-3) */}
         <main className="flex-grow pt-16 pb-12">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/signin" element={<SignIn />} />
           </Routes>
         </main>
         <Footer />
@@ -34,4 +40,3 @@ function App() {
 }
 
 export default App;
-

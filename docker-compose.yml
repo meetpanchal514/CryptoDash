@@ -1,65 +1,135 @@
 # services:
 #   backend:
-#     build: ./backend
+#     build:
+#       context: ./backend
+#       dockerfile: Dockerfile
 #     container_name: backend
 #     ports:
-#       - '5000:5000'
+#       - "5000:5000"
 #     volumes:
 #       - ./backend:/app
 #       - /app/node_modules
-#     networks:
-#       - crypto-net
 #     environment:
 #       - NODE_ENV=development
-  
+#     dns:
+#       - 8.8.8.8
+#       - 8.8.4.4
+#     networks:
+#       - cryptodash-network
+
 #   frontend:
-#     build: ./frontend
+#     build:
+#       context: ./frontend
+#       dockerfile: Dockerfile
 #     container_name: frontend
 #     ports:
-#       - '3000:3000'
+#       - "3000:3000"
 #     volumes:
 #       - ./frontend:/app
 #       - /app/node_modules
-#     depends_on:
-#       - backend
-#     networks:
-#       - crypto-net
 #     environment:
 #       - NODE_ENV=development
 #       - CHOKIDAR_USEPOLLING=true
-#       - REACT_APP_API_URL=http://localhost:5000  # Ensure this is set correctly
+#       - REACT_APP_API_URL=http://backend:5000
+#     depends_on:
+#       - backend
+#     networks:
+#       - cryptodash-network
+
 # networks:
-#   crypto-net:
+#   cryptodash-network:
 #     driver: bridge
 
-     services:
-       frontend:
-         build:
-           context: ./frontend
-           dockerfile: Dockerfile
-         ports:
-           - "3000:3000"
-         environment:
-           - REACT_APP_API_URL=http://backend:5000
-         depends_on:
-           - backend
-         networks:
-           - cryptodash-network
 
-       backend:
-         build:
-           context: ./backend
-           dockerfile: Dockerfile
-         ports:
-           - "5000:5000"
-         environment:
-           - COINMARKETCAP_API_KEY=${COINMARKETCAP_API_KEY}
-         dns:
-           - 8.8.8.8
-           - 8.8.4.4
-         networks:
-           - cryptodash-network
+# services:
+#   backend:
+#     build:
+#       context: ./backend
+#       dockerfile: Dockerfile
+#     container_name: backend
+#     ports:
+#       - "5000:5000"
+#     volumes:
+#       - ./backend:/app
+#       - /app/node_modules
+#     environment:
+#       - NODE_ENV=development
+#     dns:
+#       - 8.8.8.8
+#       - 8.8.4.4
+#     networks:
+#       - cryptodash-network
 
-     networks:
-       cryptodash-network:
-         driver: bridge
+#   frontend:
+#     build:
+#       context: ./frontend
+#       dockerfile: Dockerfile
+#     container_name: frontend
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - ./frontend:/app
+#       - /app/node_modules
+#     environment:
+#       - NODE_ENV=development
+#       - CHOKIDAR_USEPOLLING=true
+#       - REACT_APP_API_URL=http://backend:5000
+#     depends_on:
+#       - backend
+#     networks:
+#       - cryptodash-network
+
+# networks:
+#   cryptodash-network:
+#     driver: bridge
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - cryptodash-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_API_URL=http://localhost:5000  # Changed to localhost:5000
+      - REACT_APP_FIREBASE_API_KEY=${REACT_APP_FIREBASE_API_KEY}
+      - REACT_APP_FIREBASE_AUTH_DOMAIN=${REACT_APP_FIREBASE_AUTH_DOMAIN}
+      - REACT_APP_FIREBASE_PROJECT_ID=${REACT_APP_FIREBASE_PROJECT_ID}
+      - REACT_APP_FIREBASE_STORAGE_BUCKET=${REACT_APP_FIREBASE_STORAGE_BUCKET}
+      - REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${REACT_APP_FIREBASE_MESSAGING_SENDER_ID}
+      - REACT_APP_FIREBASE_APP_ID=${REACT_APP_FIREBASE_APP_ID}
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    depends_on:
+      - backend
+    networks:
+      - cryptodash-network
+
+networks:
+  cryptodash-network:
+    driver: bridge

@@ -8,4 +8,9 @@ body {
   background: var(--background-gradient);
   color: var(--text-color);
   transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 function Home() {
-  const heroVariants = {
+  const containerVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
   };
 
   const buttonVariants = {
@@ -14,46 +14,48 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-      {/* Hero Section */}
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <div className="sphere-1 absolute w-64 h-64 rounded-full opacity-50 animate__animated animate__pulse animate__infinite grad" style={{ top: '10%', left: '10%' }}></div>
+        <div className="sphere-2 absolute w-96 h-96 rounded-full opacity-50 animate__animated animate__pulse animate__infinite" style={{ bottom: '15%', right: '15%' }}></div>
+      </div>
+
       <motion.div
-        className="text-center px-4"
+        className="relative z-10 text-center p-8 max-w-2xl mx-auto"
         initial="hidden"
         animate="visible"
-        variants={heroVariants}
+        variants={containerVariants}
       >
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight" style={{ color: 'var(--text-color)' }}>
-          CryptoDash
-        </h1>
-        <p className="text-xl md:text-3xl mb-8 max-w-2xl mx-auto" style={{ color: 'var(--text-color-secondary)' }}>
-          Track the future of finance with real-time cryptocurrency insights.
-          Stay ahead with CryptoDash.
-        </p>
+        <motion.h1
+          className="text-5xl md:text-6xl font-bold mb-6"
+          style={{ color: 'var(--text-color)' }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          Welcome to CryptoDash
+        </motion.h1>
+        <motion.p
+          className="text-lg md:text-xl mb-8"
+          style={{ color: 'var(--text-color-secondary)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        >
+          Your one-stop platform to track cryptocurrency prices, market trends, and historical data in real-time.
+        </motion.p>
         <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
           <Link
             to="/dashboard"
-            className="inline-block font-semibold py-3 px-8 rounded-full shadow-lg transition-colors"
+            className="inline-block py-3 px-6 rounded-lg font-semibold text-lg"
             style={{
               backgroundColor: 'var(--button-bg)',
               color: 'var(--button-text)',
             }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = 'var(--button-bg-hover)')}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = 'var(--button-bg)')}
           >
             Explore Dashboard
           </Link>
         </motion.div>
-      </motion.div>
-
-      {/* Visual Element - Floating 3D Spheres */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ delay: 0.5, duration: 2 }}
-      >
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full opacity-20 blur-3xl animate-pulse sphere-1"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full opacity-20 blur-3xl animate-pulse delay-1000 sphere-2"></div>
       </motion.div>
     </div>
   );

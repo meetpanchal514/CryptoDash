@@ -76,7 +76,6 @@ app.get('/coins', async (req, res) => {
         };
       })
       .filter(coin => coin !== null);
-      // Removed .slice(0, 9) to allow more coins for pagination
 
     console.log('✅ Successfully fetched current coin data and simulated historical prices');
     res.json({ coins });
