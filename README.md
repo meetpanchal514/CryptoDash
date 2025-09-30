@@ -98,7 +98,8 @@ Production deployment with Nginx
 
 👤 Author
 
-Aryan Panchal
-📧 your-email@example.com
+Panchal Panchal
+📧 meetnpanchal04@gmail.com
 
-🔗 GitHub: your-profile
+🔗 GitHub: meetnpanchal514
+
